@@ -319,14 +319,16 @@ else
 
 		local Theater = ply:GetTheater()
 		if Theater then
-
-			if theater.ExtractURLData( chat ) then
-				Theater:RequestVideo( ply, chat )
-				return ""
+			-- check if the string they entered contains both characters that a link has before running this
+			if string.find(chat, "/", 1, true) and string.find(chat, ".", 1, true) then
+				if theater.ExtractURLData( chat ) then
+					Theater:RequestVideo( ply, chat )
+					return ""
+				end
+			else
+				return chat
 			end
-
 		end
-
-	end )
+	end)
 
 end
