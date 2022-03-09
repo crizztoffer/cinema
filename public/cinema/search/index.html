@@ -7,6 +7,40 @@
 </head>
 
 <body>
+    
+    <!-- ADD THE JAVASCRIPT HERE TO MAKE THE REQUESTS WORK-->
+    <script type="text/javascript">
+	// Event called when a service is hovered
+	function hoverService() {
+		console.log( "RUNLUA: surface.PlaySound('garrysmod/ui_hover.wav');" );
+	}
+
+	// Event called when a service is selected
+	function selectService(name, url) {
+		console.log( "RUNLUA: surface.PlaySound('garrysmod/ui_click.wav');" );
+
+		ga('send', 'event', 'services', 'visit', name);
+		setTimeout(function(){
+			window.location.href = url;
+		}, 100);
+	}
+
+	// Set a random tip on DOM load
+	document.addEventListener('DOMContentLoaded', function() {
+		var tips = [
+			'Did you know that Cinema is open source?<br /><a href="https://github.com/FarukGamer/cinema">View the code on GitHub.</a>',
+			'Fluent in a non-English language? Interested in helping translate the Cinema gamemode?<br /><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2419005587">Click here to read more.</a>',
+			'Interested in making your own map for Cinema?<br /><a href="http://steamcommunity.com/sharedfiles/filedetails/?id=147037972">View the Cinema mapping tutorial here.</a>'
+		];
+
+		return function() {
+			var node = document.getElementById('tip'),
+				tip = tips[Math.floor(Math.random() * tips.length)];
+
+			node.innerHTML = tip;
+		};
+	}());
+	</script>
 
     <div style="position:absolute;top:0;left:0;right:0;bottom:0;">
         <section class="content-container">
